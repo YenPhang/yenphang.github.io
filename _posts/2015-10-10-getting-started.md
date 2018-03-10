@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: 
 title: "Getting Started"
 author: "Paul Le"
 categories: journal
