@@ -1,5 +1,5 @@
 ---
-layout: 
+layout: post
 title: "Welcome to Lagrange!"
 author: "Paul Le"
 categories: journal
