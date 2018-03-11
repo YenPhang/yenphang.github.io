@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Story
+title: 讲故事的人
 ---
 <ul class="posts">
-  {% for post in site.posts %}
+  {% for post in site.categories.story %}
 
     {% unless post.next %}
       <h3>{{ post.date | date: '%Y' }}</h3>

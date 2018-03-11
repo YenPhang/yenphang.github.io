@@ -3,7 +3,7 @@ layout: page
 title: May the code be with you.
 ---
 <ul class="posts">
-  {% for post in site.posts %}
+  {% for post in site.categories.technology %}
 
     {% unless post.next %}
       <h3>{{ post.date | date: '%Y' }}</h3>
