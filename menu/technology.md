@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Technology
+title: May the code be with you.
 ---
 <ul class="posts">
   {% for post in site.posts %}
