@@ -3,7 +3,7 @@ layout: page
 title: 讲故事的人
 ---
 <ul class="posts">
-  {% for post in site.categories.story %}
+  {% for post in site.categories.literatrue %}
 
     {% unless post.next %}
       <h3>{{ post.date | date: '%Y' }}</h3>
