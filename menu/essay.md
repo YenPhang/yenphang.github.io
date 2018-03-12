@@ -1,9 +1,9 @@
 ---
 layout: page
-title: 讲故事的人
+title: 随笔
 ---
 <ul class="posts">
-  {% for post in site.categories.literatrue %}
+  {% for post in site.categories.essay %}
 
     {% unless post.next %}
       <h3>{{ post.date | date: '%Y' }}</h3>
