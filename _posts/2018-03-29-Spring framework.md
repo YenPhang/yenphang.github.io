@@ -4,7 +4,7 @@ title: "Spring框架学习笔记整理"
 author: "yen"
 categories: tech
 tags: [documentation,sample]
-image: cutting.jpg
+image: ColorfulTromso.jpg
 ---
 ## Spring概念：  
  Spring是一个轻量级的、非侵入式的JEE应用框架。一站式的整合平台。
