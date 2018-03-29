@@ -44,5 +44,5 @@ Weave:织入。
  - test(String ...) : 表示方法名为test，参数个数不定，但必须都是String类型，这里的[...] 不是通配符，而是java中不定参数的意思。
 
 ![AOP简述](http://p6ch8daxu.bkt.clouddn.com/18-3-29/33189985.jpg)
-![AOP视频脑图](http://p6ch8daxu.bkt.clouddn.com/18-3-29/74148035.jpg)
+![AOP视频脑图](http://p6ch8daxu.bkt.clouddn.com/18-3-29/64030072.jpg)
 ![AOP设计实战](http://p6ch8daxu.bkt.clouddn.com/18-3-29/46839058.jpg)
