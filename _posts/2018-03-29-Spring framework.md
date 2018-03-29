@@ -14,4 +14,4 @@ image: ColorfulTromso.jpg
 - IoC (Inversion of Control)
 - AOP (Aspect  Oriented Programming)  
 
-![spring-mind](http://p6ch8daxu.bkt.clouddn.com/18-3-29/48973103.jpg)
+![spring-mind](http://p6ch8daxu.bkt.clouddn.com/18-3-29/82044033.jpg)
