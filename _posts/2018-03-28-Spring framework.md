@@ -11,7 +11,5 @@ image: ColorfulTromso.jpg
  Spring是面向Bean的编程，在Spring中所有对象都可以看成一个Bean。
 
 ### Spring的核心设计思想
-- IoC (Inversion of Control)
-- AOP (Aspect  Oriented Programming)  
-
-![spring-mind](http://p6ch8daxu.bkt.clouddn.com/18-3-29/82044033.jpg)
+- IoC (Inversion of Control)：控制反转/依赖注入
+- AOP (Aspect  Oriented Programming) ：:面向切面编程

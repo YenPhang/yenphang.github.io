@@ -61,6 +61,59 @@ AspectJ 支持 5 种类型的通知注解:
 2. 不同通知类型，执行顺序不确定
 3. 可以通过org.springframework.core.Odered接口自定义执行顺序
 
+#### AspectJ 示例代码
+**配置文件**
+~~~java
+<beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"	 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	.........
+  >
+
+	<bean id="annoProxy" class="yen.AnnoProxy"></bean>
+	<bean id="targetImpl" class="yen.TargetImpl"></bean>
+
+	<!-- 开启AOP的注解支持 -->
+	<aop:aspectj-autoproxy />
+
+</beans>
+~~~
+**目标对象**
+~~~java
+public class TargetImpl {
+  public String test01(int sum){
+    System.out.println("这是TargetImpl:"+sum);
+    return "Hello Yen!";
+  }
+}
+~~~
+**增强类**
+~~~java
+@Aspect
+public class AnnoProxy {
+  @Pointcut(value="execution(* yen..*.*(int))")
+  public void pointCut(){}
+
+  @Before(value="pointCut()")
+  public void before(int a){
+    System.out.println("这是前置增强");
+  }
+}
+~~~
+**测试类**
+~~~java
+public class Test {
+  public static void main(String[] args) {
+    ApplicationContext atc = new ClassPathXmlApplicationContext("applicationContext-anno.xml");
+    TargetImpl ti = (TargetImpl)atc.getBean("targetImpl");
+    ti.test01(80);
+  }
+}
+~~~
+
+
 ### 通配符
  ![tongpeifu](http://p6ch8daxu.bkt.clouddn.com/18-3-29/13692363.jpg)
  e.g.
@@ -73,7 +126,7 @@ AspectJ 支持 5 种类型的通知注解:
 ### AOP设计实践
 - 尽量拦截方法，而不是字段
 - 应遵循如下原则：
->在大部分或全部模块都需要使用的通用功能上使用
+>在大部分或全部模块都需要使用的通用功能上使用  
 >预计未来功能扩展的可能比较大的地方
 
 - 应遵循正交原则：先进后出，避免交叉
