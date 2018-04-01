@@ -7,8 +7,8 @@ tags: [documentation,sample]
 image: ColorfulTromso.jpg
 ---
 ## AOP概念：  
-  AOP (Aspect Oriented Programming)  
-  简而言之就是面向切面编程。它所要实现的目标就是解耦，提高代码的灵活性和可扩展性。  
+  AOP (Aspect Oriented Programming) 是一种编程规范形式【思想】。从另一角度考虑程序结构，完善面向对象编程思想。
+  AOP 简而言之就是面向切面编程。它所要实现的目标就是解耦，提高代码的灵活性和可扩展性。  
   面向切面编程指的是在原来代码的基础上，加上增强的部分，生成一个代理的对象。也就是说，在不修改源代码的情况下，实现对目标类的增强，其原理就是将一个被AOP动态增强的类，通过Java动态代理模式生成一个代理类。AOP 主要是利用代理模式的技术来实现的。
 
 ### AOP vs OOP
@@ -46,4 +46,5 @@ Weave:织入。
 
 ![AOP简述](http://p6ch8daxu.bkt.clouddn.com/18-3-29/33189985.jpg)
 ![AOP视频脑图](http://p6ch8daxu.bkt.clouddn.com/18-3-29/64030072.jpg)
+
 ![AOP设计实战](http://p6ch8daxu.bkt.clouddn.com/18-3-29/46839058.jpg)
