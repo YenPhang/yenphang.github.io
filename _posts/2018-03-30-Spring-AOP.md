@@ -20,9 +20,9 @@ image: ColorfulTromso.jpg
 ![aop](http://p6ch8daxu.bkt.clouddn.com/18-3-29/6490650.jpg)
 
 ### AOP的应用
-打印日志：独立的日志模块，在业务开发后期嵌入到各个业务模块中，在代码里不存在日志相关代码;  
-性能监测;  
-权限检查：使方法功能单一，剥离权限检查部分。  
+- 打印日志：独立的日志模块，在业务开发后期嵌入到各个业务模块中，在代码里不存在日志相关代码  
+- 性能监测
+- 权限检查
 - 最终的目的就是为了解耦，尽量将业务无关的，且同一类方法，功能中需要做的重复动作，提取出来。
 
 ### AOP相关概念
@@ -51,13 +51,17 @@ AspectJ 支持 5 种类型的通知注解:
  - test(String ...) : 表示方法名为 test，参数个数不定，但必须都是 String 类型，这里的[...] 不是通配符，而是 java 中不定参数的意思。
 
 ### AspectJ
-是注解形式的 AOP。Java 社区里最完整最流行的 AOP 框架。
+是注解形式的 AOP。Java 社区里最完整流行的 AOP 框架。
 在 AspectJ 注解中, 切面只是一个带有 @Aspect 注解的 Java 类。通知是标注有某种注解的简单的 Java 方法。
 
-### AspectJ语法
-1. execution(public * *(..))   任何类的任何返回值的任何方法
-2. execution(* set*(..))       任何类的set开头的方法
-3. execution(* com.xyz.service.AccountService.*(..))         任何返回值的规定类里面的方法
-4. execution(* com.xyz.service...(..))      任何返回值的，规定包或者规定包子包的任何类任何方法
+### AspectJ 常用语法
+在 AOP 注解中可以使用的属性。  
+**execution** 用于匹配方法执行的连接点  
+~execution(* yen.*.*(..))~
+- 指定在执行 yen 包中任意类的任意方法之前执行方法增强
+- 第一个 * 号表示返回值不限  
+- 第二个 * 号表示类名不限  
+- 第三个 * 号表示方法名不限  
+- 小括号中的 .. 表示任意个数、类型不限的形参
 
 ![AOP-mind](http://p6ch8daxu.bkt.clouddn.com/18-4-1/6101874.jpg)
