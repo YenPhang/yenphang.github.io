@@ -117,4 +117,4 @@ public class Test {
 - 注入集合类型的属性（分别使用<list>，<set>,<map>,<props>标签实现）
 - Properties（properties 也是 key-value 的形式，可以使用 map 的方式遍历）
 
-![spring-mind](http://p6ch8daxu.bkt.clouddn.com/18-3-29/82044033.jpg)
+![ioc-mind](http://p6ch8daxu.bkt.clouddn.com/18-4-1/77339425.jpg)
