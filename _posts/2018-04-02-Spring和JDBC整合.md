@@ -9,14 +9,14 @@ image: spools.jpg
 ### Spring 对数据层（持久化技术）的支持
 - 数据层：指 DAO 层，主要解决与数据库的部分
 - 提供了一致的异常
-- 一致的DAO抽象类
+- 一致的DAO抽象类  
 **JDBC 对应的模板类：org.springframework.jdbc.core.JdbcTemplate**  
 
 ### Spring 抽象框架
-- Core模块-核心处理模块
-- Datasource模块-简化DataSource访问的工具类
-- Object模块-封装了查询、更新以及存储过程的类组成
-- Support模块-提供了异常转换和相关的工具类
+- Core模块 - 核心处理模块
+- Datasource模块 - 简化DataSource访问的工具类
+- Object模块 - 封装了查询、更新以及存储过程的类组成
+- Support模块 - 提供了异常转换和相关的工具类
 
 ### JdbcTemplate 概念
 - JdbcTemplate 是 core 包的核心类
@@ -25,7 +25,7 @@ image: spools.jpg
 
 ### 其他工具类
 | 类名 | 描述 |
-| - | :-: |
+| - | -: |
 | NamedParameterJdbcTe mpIate | 对 JdbcTemplate 进行了封装，并对命名参数提供了支持 |  
 | SimpleJdbcTempIate | JdbcTemplate 的另一个"兄弟"，提供了诸如泛型、 变长参数等支持 |
 | SQLExceptionTransIator 接口 | 提供 SQL 异常与 DataAccess 异常转换的支持 |
@@ -87,13 +87,13 @@ public class UserDaoImpl implements UserDao{
   private DataSource dataSource;
   public void setDataSource(DataSource dataSource) {
     this.dataSource = dataSource;
-	}
+  }
 
-
-	@Override
+  @Override
   public void addUser(final User user) {
     // 直接使用JdbcTemplate
-    //String sql = "insert into user(uid,name,age) " + "values('"+user.getUid()+"','"+user.getName()+"',"+user.getAge()+")";
+    //String sql = "insert into user(uid,name,age) " +
+    //    "values('"+user.getUid()+"','"+user.getName()+"',"+user.getAge()+")";
     // 创建一个JDBC帮助模板
     //JdbcTemplate jt = new JdbcTemplate(dataSource);
     //jt.execute(sql);
@@ -104,39 +104,39 @@ public class UserDaoImpl implements UserDao{
     PreparedStatementCallback pscb = new PreparedStatementCallback(){
       @Override
       public Object doInPreparedStatement(PreparedStatement pstmt) throws SQLException, DataAccessException {
-				pstmt.setString(1, user.getUuid());
-				pstmt.setString(2, user.getName());
-				pstmt.setInt(3, user.getAge());
-     // 执行pstmt
-        boolean flag = pstmt.execute();
-        return flag;
+          pstmt.setString(1, user.getUuid());
+          pstmt.setString(2, user.getName());
+          pstmt.setInt(3, user.getAge());
+      // 执行pstmt
+          boolean flag = pstmt.execute();
+          return flag;
       }
-  }
+    }
 
-		// 调用该内部类
-		JdbcTemplate jt = new JdbcTemplate(dataSource);
-		jt.execute(sql, pscb);
+    // 调用该内部类
+    JdbcTemplate jt = new JdbcTemplate(dataSource);
+    jt.execute(sql, pscb);
   }
 
    //查询数据
    @Override
     public List<User> getUsers() {
-     List<User> users = new ArrayList<User>();
-     String sql = "select * from user";
+      List<User> users = new ArrayList<User>();
+      String sql = "select * from user";
 
     // 创建了一个JDBC帮助模板
-     JdbcTemplate jtQ = new JdbcTemplate(dataSource);
+      JdbcTemplate jtQ = new JdbcTemplate(dataSource);
     // 取得查询结果
-     SqlRowSet set = jtQ.queryForRowSet(sql);
+      SqlRowSet set = jtQ.queryForRowSet(sql);
     // 根据结果条数进行遍历
-     while(set.next()){
+      while(set.next()){
     // 将结果组装成对象
-      User user = new User();
-      user.setUid(set.getString(1));
-      user.setName(set.getString(2));
-      user.setAge(set.getInt(3));
+        User user = new User();
+        user.setUid(set.getString(1));
+        user.setName(set.getString(2));
+        user.setAge(set.getInt(3));
     // 将对象放入返回集合
-      users.add(user);
+        users.add(user);
       }
       return users;
     }
@@ -145,15 +145,15 @@ public class UserDaoImpl implements UserDao{
 // 演示jdbcDAOSupport
 public class UserDAOImpl2 extends JdbcDaoSupport implements UserDAO{
 
-	@Override
+  @Override
   public void addUser(User user) {
     System.out.println("我是实现2");
     String sql = "insert into user(uid,name,age) " + "values('"+user.getUuid()+"','"+user.getName()+"',"+user.getAge()+")";
     getJdbcTemplate().execute(sql);
   }
 
-	@Override
-	public List<User> getUsers() {
+  @Override
+  public List<User> getUsers() {
     return null;
   }
 }
