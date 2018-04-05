@@ -12,6 +12,28 @@ image: spools.jpg
 - 一致的DAO抽象类
 **JDBC 对应的模板类：org.springframework.jdbc.core.JdbcTemplate**  
 
+### Spring 抽象框架
+- Core模块-核心处理模块
+- Datasource模块-简化DataSource访问的工具类
+- Object模块-封装了查询、更新以及存储过程的类组成
+- Support模块-提供了异常转换和相关的工具类
+
+### JdbcTemplate 概念
+- JdbcTemplate 是 core 包的核心类
+- 主要作用是完成资源创建与释放等工作
+- JdbcTemplate 提供了PreparedStatementCallback回掉函数供使用
+
+### 其他工具类
+| 类名 | 描述 |
+| - | :-: |
+| NamedParameterJdbcTe mpIate | 对 JdbcTemplate 进行了封装，并对命名参数提供了支持 |  
+| SimpleJdbcTempIate | JdbcTemplate 的另一个"兄弟"，提供了诸如泛型、 变长参数等支持 |
+| SQLExceptionTransIator 接口 | 提供 SQL 异常与 DataAccess 异常转换的支持 |
+| DataSourceUtils | 提供强大的数据库访问能力 |
+| SmartDataSource接囗 | DataSource 接口的一个扩展，用来提供数据库连接 |
+| AbstractDataSource | 帮助简化DataSource接口开发 |
+| SingleConnectionDataSo urce | SmartDataSource接口的一个实现，其内部包装了一个单连接 |
+
 ### 引入 Spring 框架后的实现步骤
 1. 创建数据源的 bean
 2. 注入数据源
