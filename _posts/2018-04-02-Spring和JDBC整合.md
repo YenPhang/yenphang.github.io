@@ -24,15 +24,7 @@ image: spools.jpg
 - JdbcTemplate 提供了PreparedStatementCallback回掉函数供使用
 
 ### 其他工具类
-| 类名 | 描述 |  
-| :--- | :- |  
-| NamedParameterJdbcTe mpIate | 对 JdbcTemplate 进行了封装，并对命名参数提供了支持 |    
-| SimpleJdbcTempIate | JdbcTemplate 的另一个"兄弟"，提供了诸如泛型、 变长参数等支持 |  
-| SQLExceptionTransIator 接口 | 提供 SQL 异常与 DataAccess 异常转换的支持 |  
-| DataSourceUtils | 提供强大的数据库访问能力 |  
-| SmartDataSource接囗 | DataSource 接口的一个扩展，用来提供数据库连接 |  
-| AbstractDataSource | 帮助简化DataSource接口开发 |  
-| SingleConnectionDataSo urce | SmartDataSource接口的一个实现，其内部包装了一个单连接 |  
+![工具类](http://p6ch8daxu.bkt.clouddn.com/18-4-5/95623828.jpg)
 
 
 ### 引入 Spring 框架后的实现步骤
@@ -171,8 +163,10 @@ public class UserDAOImpl2 extends JdbcDaoSupport implements UserDAO{
  </bean>
 
  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-   <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-	 <property name="url" value="jdbc:mysql://localhost/kgc"></property>
+   <property name="driverClassName" value="com.mysql.jdbc.Driver">
+   </property>
+	 <property name="url" value="jdbc:mysql://localhost/kgc">
+   </property>
 	 <property name="username" value="root"></property>
 	 <property name="password" value="1234"></property>
  </bean>
