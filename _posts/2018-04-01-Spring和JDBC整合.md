@@ -18,94 +18,158 @@ image: spools.jpg
 3. 创建 JdbcTemplate
 4. 执行 SQL 语句
 
-#### 代码示例(添加数据)
+#### 代码示例
 **创建实体类和接口**
 ~~~java
 public class User {
-	private String uid;
-	private String name;
-	private int age;
+  private String uid;
+  private String name;
+  private int age;
 
-	public String getUid() {
-		return uid;
+  public String getUid() {
+    return uid;
 	}
-	public void setUid(String uid) {
-		this.uid = uid;
+  public void setUid(String uid) {
+    this.uid = uid;
 	}
-	public String getName() {
-		return name;
+  public String getName() {
+    return name;
 	}
-	public void setName(String name) {
-		this.name = name;
+  public void setName(String name) {
+    this.name = name;
 	}
-	public int getAge() {
-		return age;
+  public int getAge() {
+    return age;
 	}
-	public void setAge(int age) {
-		this.age = age;
+  public void setAge(int age) {
+    this.age = age;
 	}
 
 	@Override
-	public String toString() {
-		return "User [uid=" + uid + ", name=" + name + ", age=" + age+ "]";
-	}
+  public String toString() {
+    return "User [uid=" + uid + ", name=" + name + ", age=" + age+ "]";
+  }
 }
 ~~~
 ~~~java
 public interface UserDao {
-	public void addUser(User user);
-	public List<User> getUsers();
-
+  public void addUser(User user);
+  public List<User> getUsers();
 }
 ~~~
 
 **使用 JdbcTemplate 实现与数据库的交互（ CRUD ）**
 ~~~java
 public class UserDaoImpl implements UserDao{
-	// 获取数据源
-	private DataSource dataSource;
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
+  // 获取数据源
+  private DataSource dataSource;
+  public void setDataSource(DataSource dataSource) {
+    this.dataSource = dataSource;
 	}
 
+
 	@Override
-	public void addUser(final User user) {
-		// 直接使用JdbcTemplate
-    String sql = "insert into user(uid,name,age) " +
-                 "values('"+user.getUid()+"','"+user.getName()+"',"+user.getAge()+")";
+  public void addUser(final User user) {
+    // 直接使用JdbcTemplate
+    //String sql = "insert into user(uid,name,age) " + "values('"+user.getUid()+"','"+user.getName()+"',"+user.getAge()+")";
     // 创建一个JDBC帮助模板
-    JdbcTemplate jt = new JdbcTemplate(dataSource);
-    jt.execute(sql);
+    //JdbcTemplate jt = new JdbcTemplate(dataSource);
+    //jt.execute(sql);
+
+    // 演示PreparedStatementCallback回调函数
+    String sql = "insert into user(uid,name,age) values(?,?,?)";
+    // 定义一个PreparedStatementCallback的内部类
+    PreparedStatementCallback pscb = new PreparedStatementCallback(){
+      @Override
+      public Object doInPreparedStatement(PreparedStatement pstmt) throws SQLException, DataAccessException {
+				pstmt.setString(1, user.getUuid());
+				pstmt.setString(2, user.getName());
+				pstmt.setInt(3, user.getAge());
+     // 执行pstmt
+        boolean flag = pstmt.execute();
+        return flag;
+      }
+  }
+
+		// 调用该内部类
+		JdbcTemplate jt = new JdbcTemplate(dataSource);
+		jt.execute(sql, pscb);
+  }
+
+   //查询数据
+   @Override
+    public List<User> getUsers() {
+     List<User> users = new ArrayList<User>();
+     String sql = "select * from user";
+
+    // 创建了一个JDBC帮助模板
+     JdbcTemplate jtQ = new JdbcTemplate(dataSource);
+    // 取得查询结果
+     SqlRowSet set = jtQ.queryForRowSet(sql);
+    // 根据结果条数进行遍历
+     while(set.next()){
+    // 将结果组装成对象
+      User user = new User();
+      user.setUid(set.getString(1));
+      user.setName(set.getString(2));
+      user.setAge(set.getInt(3));
+    // 将对象放入返回集合
+      users.add(user);
+      }
+      return users;
+    }
+~~~
+~~~java
+// 演示jdbcDAOSupport
+public class UserDAOImpl2 extends JdbcDaoSupport implements UserDAO{
+
+	@Override
+  public void addUser(User user) {
+    System.out.println("我是实现2");
+    String sql = "insert into user(uid,name,age) " + "values('"+user.getUuid()+"','"+user.getName()+"',"+user.getAge()+")";
+    getJdbcTemplate().execute(sql);
+  }
+
+	@Override
+	public List<User> getUsers() {
+    return null;
+  }
+}
 ~~~
 
 **配置文件**
 ~~~java
 <!-- 数据库源连接池 -->
-  <bean id="UserDaoImpl" class="com.kgc.user.dao.UserDaoImpl">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
+ <bean id="UserDaoImpl" class="com.kgc.user.dao.UserDaoImpl">
+   <property name="dataSource" ref="dataSource"></property>
+ </bean>
+ <bean id="UserDaoImpl2" class="com.kgc.user.dao.UserDaoImpl2">
+   <property name="dataSource" ref="dataSource"></property>
+ </bean>
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost/kgc"></property>
-		<property name="username" value="root"></property>
-		<property name="password" value="1234"></property>
-	</bean>
+ <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+   <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	 <property name="url" value="jdbc:mysql://localhost/kgc"></property>
+	 <property name="username" value="root"></property>
+	 <property name="password" value="1234"></property>
+ </bean>
 ~~~
 
 **测试类**
+~~~java
 public class Test {
-	public static void main(String[] args) {
-		ApplicationContext atc = new ClassPathXmlApplicationContext("applicationContext.xml");
+  public static void main(String[] args) {
+    ApplicationContext atc = new ClassPathXmlApplicationContext("applicationContext.xml");
+    //UserDao dao = (UserDao)atc.getBean("UserDaoImpl");
+    UserDao dap = (UserDao)atc.getBean("UserDaoImpl2");
 
-		UserDao dao = (UserDao)atc.getBean("UserDaoImpl");
+    User user = new User();
+    user.setUid("001");
+    user.setName("0001");
+    user.setAge(18);
 
-		User user = new User();
-		user.setUid("001");
-		user.setName("0001");
-		user.setAge(18);
-
-		dao.addUser(user);
-    //System.out.println(dao.getUsers());
+    dao.addUser(user);
+    System.out.println(dao.getUsers());
 	}
 }
+~~~
