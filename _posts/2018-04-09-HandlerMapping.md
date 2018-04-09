@@ -11,9 +11,9 @@ image: cards.jpg
 管理 URL 和 Controller 映射关系的处理器  
 
 ### HandlerMapping 类型
-- BeanNameUrlHandler  默认的 bean name 映射器
-- ControllerClassNameHandlerMapping   类名映射器
-- SimpleUrlHandlerMapping  简单 url 处理器映射器
+- BeanNameUrlHandler  - 默认的 bean name 映射器
+- ControllerClassNameHandlerMapping   - 类名映射器
+- SimpleUrlHandlerMapping  - 简单 url 处理器映射器
 
 **bean name映射器代码示例**  
 ~~~java

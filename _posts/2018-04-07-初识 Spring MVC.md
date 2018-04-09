@@ -51,7 +51,7 @@ Spring MVC 的设计是围绕 DispatcherServlet 展开的， DispatcherServlet �
 4. 配置文件(文件名须是：servlet-name+"-servlet".xml)    
 5. 配置控制器   
 
- 
+
 ~~~java
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -79,7 +79,7 @@ Spring MVC 的设计是围绕 DispatcherServlet 展开的， DispatcherServlet �
   <bean  name="/helloWorld.do" class="cn.kgc.controllers.HelloWorldController"/>
 
   <!-- 提供视图解析器 -->
-  <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
 
   <!-- 前缀 -->
   <property name="prefix" value="/WEB-INF/jsps/"/>
@@ -111,7 +111,7 @@ public class HelloWorldController implements Controller{
 JSP页面
 ~~~java
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Hello World</title>
 </head>
 <body>
