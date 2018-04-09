@@ -49,7 +49,9 @@ Spring MVC 的设计是围绕 DispatcherServlet 展开的， DispatcherServlet �
 3. 在 Web.xml 中配置 SpringMVC    
 ![](http://p6ch8daxu.bkt.clouddn.com/18-4-9/28821644.jpg)
 4. 配置文件(文件名须是：servlet-name+"-servlet".xml)    
-5. 配置控制器    
+5. 配置控制器   
+
+ 
 ~~~java
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

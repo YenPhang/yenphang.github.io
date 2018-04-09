@@ -15,7 +15,7 @@ image: cards.jpg
 - ControllerClassNameHandlerMapping   类名映射器
 - SimpleUrlHandlerMapping  简单 url 处理器映射器
 
-** bean name 映射器代码示例**  
+**bean name映射器代码示例**  
 ~~~java
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -116,34 +116,34 @@ public class ClassNameController extends AbstractController{
 <!-- 简单 URL 映射器 1 -->
 <bean id="SimpleUrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">  
   <property name="mappings">
-  	<props>
-  	<!-- key 就是 url;value 就是控制器名字 -->
-	  	<prop key="/SimpleUrl.do">SimpleUrlController</prop>
-  	</props>
+    <props>
+    <!-- key 就是 url;value 就是控制器名字 -->
+      <prop key="/SimpleUrl.do">SimpleUrlController</prop>
+    </props>
   </property>
-</bean>
+</bean>  
 
-<!--
+<!--  
 <!-- 简单 URL 映射器 2 -->
 <bean id="SimpleUrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">  
   <property name="mappings">
-  	<value>
-	  	simpleValue.do=SimpleUrlController
-  	</value>
+    <value>
+      simpleValue.do=SimpleUrlController
+    </value>
   </property>
-</bean>
--->
+</bean>  
+-->  
 
-<!--
+<!--  
 <!-- 简单 URL 映射器 3 -->
 <bean id="SimpleUrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">  
   <property name="urlMap">
-  	<map>
-	  	<entry key="/urlMap.do" value-ref="SimpleUrlController"></entry>
-  	</map>
+    <map>
+      <entry key="/urlMap.do" value-ref="SimpleUrlController"></entry>
+    </map>
   </property>
-</bean>
--->
+</bean>  
+-->  
 
 <!-- 验证 简单 URL 映射器的控制器 -->
 <bean id="SimpleUrl" class="cn.kgc.controllers.SimpleUrlController"/>
