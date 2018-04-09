@@ -33,7 +33,7 @@ image: spools.jpg
 3. 创建 JdbcTemplate
 4. 执行 SQL 语句
 
-#### 代码示例
+**代码示例**
 **创建实体类和接口**
 ~~~java
 public class User {
